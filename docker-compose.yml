@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres:10
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+    command: ["python", "manage.py", "runserver"]
+
+volumes:
+  dbdata:
