@@ -2,11 +2,22 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 
 from .models import Todo
 from .serializers import TodoSerializer
+
+
+class APIRoot(APIView):
+    """
+    API root view listing all routes.
+    """
+    def get(self, request):
+        return Response({
+            'todos': reverse('todo-list-view', request=request)
+        })
 
 
 class TodoList(APIView):
