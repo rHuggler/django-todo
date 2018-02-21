@@ -12,8 +12,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/usr/src/app
     command: ["python", "manage.py", "runserver"]
+      - ./django_crud:/usr/src/app
 
 volumes:
   dbdata:
