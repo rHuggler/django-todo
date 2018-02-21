@@ -11,7 +11,7 @@ from .serializers import TodoSerializer
 
 class TodoList(APIView):
     """
-    List all To-Dos or create a new one.
+    List all to-dos or create a new one.
     """
     def get(self, request, format=None):
         todos = Todo.objects.all()
@@ -28,6 +28,7 @@ class TodoList(APIView):
 
 class TodoItem(APIView):
     """
+    Retrieve, delete, update or update partially a to-do instance.
     """
     def get(self, request, pk, format=None):
         todo = get_object_or_404(Todo, id=pk)
