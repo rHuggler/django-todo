@@ -11,4 +11,4 @@ RUN apk update && \
 RUN pip install --no-cache-dir -r requirements.txt && \
  apk --purge del .build-deps
 
-COPY . .
+COPY django_crud/ .
