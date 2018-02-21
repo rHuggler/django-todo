@@ -33,3 +33,11 @@ class TodoItem(APIView):
         todo = get_object_or_404(Todo, id=pk)
         serializer = TodoSerializer(todo)
         return Response(serializer.data)
+
+    def patch(self, request, pk, format=None):
+        todo = get_object_or_404(Todo, id=pk)
+        serializer = TodoSerializer(todo, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
