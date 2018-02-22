@@ -15,5 +15,17 @@ services:
       - ./api/django_todo:/usr/src/app
     command: python manage.py runserver 0.0.0.0:8000
 
+  web:
+    build: ./web
+    depends_on:
+      - api
+    ports:
+      - "8080:8080"
+    environment:
+      - HOST=0.0.0.0
+    volumes:
+      - ./web/vue-todo:/usr/src/app
+    command: npm run dev
+
 volumes:
   dbdata:
