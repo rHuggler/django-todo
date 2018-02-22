@@ -5,14 +5,14 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
 
-  app:
-    build: .
+  api:
+    build: ./api
     depends_on:
       - db
     ports:
       - "8000:8000"
     volumes:
-      - ./django_todo:/usr/src/app
+      - ./api/django_todo:/usr/src/app
     command: python manage.py runserver 0.0.0.0:8000
 
 volumes:
