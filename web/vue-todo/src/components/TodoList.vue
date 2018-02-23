@@ -12,7 +12,7 @@
           type="checkbox"
           :id="todo.id"
           v-model="todo.status"
-          v-on:change="changeTodoStatus(todo)">
+          @change="changeTodoStatus(todo)">
 
         <label
           :for="todo.id"
@@ -21,7 +21,7 @@
         </label>
 
         <button
-          v-on:click="deleteTodo(todo)">
+          @click="deleteTodo(todo)">
           x
         </button>
       </li>
