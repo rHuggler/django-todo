@@ -80,6 +80,7 @@ export default {
         })
           .then(response => {
             this.todos.push(response.data)
+            event.target.value = ''
           })
           .catch(e => {
             this.errors.push(e)
