@@ -2,17 +2,21 @@
   <div class="to-dos">
     <ul
       class="to-do-list">
+
       <li
         class="to-do"
         v-for="todo in todos"
         :key="todo.id">
+
         <input
           type="checkbox"
           :id="todo.id"
           v-model="todo.status"
           v-on:change="changeTodoStatus(todo)">
+
         <label
-          :for="todo.id">
+          :for="todo.id"
+          :class="{ strike: todo.status }">
           {{todo.text}}
         </label>
       </li>
@@ -36,7 +40,7 @@ export default {
       errors: []
     }
   },
-  
+
   methods: {
     getTodoList () {
       requester.get('todos/')
@@ -63,5 +67,10 @@ export default {
 <style>
 li {
   list-style: none;
+  margin-bottom: 10px;
+}
+
+.strike {
+  text-decoration: line-through;
 }
 </style>
