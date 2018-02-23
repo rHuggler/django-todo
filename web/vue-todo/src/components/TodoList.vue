@@ -20,6 +20,15 @@
           {{todo.text}}
         </label>
       </li>
+
+      <input
+        type="checkbox"
+        disabled>
+      <input
+        type="text"
+        placeholder="New To-Do"
+        @keyup.enter="postNewTodo">
+
     </ul>
   </div>
 </template>
@@ -51,10 +60,26 @@ export default {
           this.errors.push(e)
         })
     },
+
     changeTodoStatus (todo) {
       requester.patch('todos/' + todo.id + '/', {
         status: todo.status
       })
+    },
+
+    postNewTodo (event) {
+      let inputText = event.target.value
+      if (inputText) {
+        requester.post('todos/', {
+          text: inputText
+        })
+          .then(response => {
+            this.todos.push(response.data)
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
     }
   },
 
