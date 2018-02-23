@@ -19,6 +19,11 @@
           :class="{ strike: todo.status }">
           {{todo.text}}
         </label>
+
+        <button
+          v-on:click="deleteTodo(todo)">
+          x
+        </button>
       </li>
 
       <input
@@ -80,6 +85,17 @@ export default {
             this.errors.push(e)
           })
       }
+    },
+
+    deleteTodo (todo) {
+      if (confirm('This will delete "' + todo.text + '" to-do.')) {
+        requester.delete('todos/' + todo.id + '/')
+          .catch(e => {
+            this.errors.push(e)
+          })
+        let i = this.todos.indexOf(todo)
+        let _ = this.todos.splice(i, 1)
+      }
     }
   },
 
@@ -97,5 +113,16 @@ li {
 
 .strike {
   text-decoration: line-through;
+}
+
+button {
+  border: none;
+  margin-left: 5px;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+button:hover {
+  color: red;
 }
 </style>
