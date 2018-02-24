@@ -41,6 +41,16 @@
         @keyup.enter="postNewTodo">
 
     </ul>
+    <ul
+      class="errors"
+      v-if="errors"
+      v-for="error in errors"
+      :key="error.id">
+      <li
+        class="error">
+          {{error.response.data.text[0]}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -120,7 +130,14 @@ export default {
 
 .to-dos {
   margin-top: 40px;
+  margin-bottom: 0;
   padding-left: 20%;
+  text-align: left;
+}
+
+.errors {
+  margin-top: 0;
+  padding-left: 24%;
   text-align: left;
 }
 
@@ -131,6 +148,12 @@ export default {
 .to-do {
   list-style: none;
   margin-bottom: 10px;
+}
+
+.error {
+  list-style: none;
+  font-size: 0.8rem;
+  color: crimson;
 }
 
 .strike {
