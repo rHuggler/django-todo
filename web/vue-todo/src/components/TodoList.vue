@@ -1,8 +1,11 @@
 <template>
-  <div class="to-dos">
-    <h1>To-Do List</h1>
+  <div class="to-do-list">
+    <h1
+      class="main-header">
+      To-Do List
+    </h1>
     <ul
-      class="to-do-list">
+      class="to-dos">
 
       <li
         class="to-do"
@@ -108,6 +111,21 @@ export default {
 </script>
 
 <style>
+.to-do-list {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.to-dos {
+  margin-top: 40px;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.main-header {
+  margin: 0;
+}
+
 li {
   list-style: none;
   margin-bottom: 10px;
