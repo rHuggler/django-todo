@@ -24,10 +24,12 @@
           {{todo.text}}
         </label>
 
-        <button
+        <a
+          class="delete-button"
+          href="#"
           @click="deleteTodo(todo)">
-          x
-        </button>
+          (delete)
+        </a>
       </li>
 
       <input
@@ -135,14 +137,17 @@ li {
   text-decoration: line-through;
 }
 
-button {
+.delete-button {
   border: none;
-  margin-left: 5px;
   background-color: #fff;
   font-weight: bold;
 }
 
-button:hover {
-  color: red;
+a {
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  font-size: 0.8rem;
+  padding-left: 5px;
 }
 </style>
