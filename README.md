@@ -37,7 +37,7 @@ Running the app:
     docker-compose up
 ```
 
-Access the browsable API at [http://localhost:8000](http://localhost:8000).
+Access the browsable API at [http://localhost:8000](http://localhost:8000).  
 Access the web client at [http://localhost:8080](http://localhost:8080).
 
 Bring the app down:
