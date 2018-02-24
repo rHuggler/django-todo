@@ -114,13 +114,13 @@ export default {
 
 <style>
 .to-do-list {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
 }
 
 .to-dos {
   margin-top: 40px;
-  padding-left: 40px;
+  padding-left: 20%;
   text-align: left;
 }
 
@@ -128,7 +128,7 @@ export default {
   margin: 0;
 }
 
-li {
+.to-do {
   list-style: none;
   margin-bottom: 10px;
 }
