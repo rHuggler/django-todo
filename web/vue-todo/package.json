@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "materialize-css": "^0.100.2",
+    "materialize-css": "^1.0.0-alpha.4",
     "moment": "^2.20.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
