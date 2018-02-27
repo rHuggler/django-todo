@@ -1,25 +1,42 @@
 <template>
-  <ul
-    class="todo-list"
+  <div
+    class="row"
   >
-    <li
-      v-for="todo in todos"
-      :key="todo.id"
+    <ul
+      class="col s6 offset-s3 card-panel grey lighten-5"
     >
-      <todo-item
-        :todo="todo"
-        @remove="removeTodo"
+    <h3
+    >
+      To-Do List
+    </h3>
+      <li
+        class="left-align"
+        v-for="todo in todos"
+        :key="todo.id"
       >
-      </todo-item>
-    </li>
-    <li>
-      <input
-        type="text"
-        v-model="newTodoText"
-        @keyup.enter="createTodo"
+        <todo-item
+          :todo="todo"
+          @remove="removeTodo"
+        >
+        </todo-item>
+      </li>
+      <div
+        class="input-field col s8"
       >
-    </li>
-  </ul>
+        <input
+          id="new_todo"
+          type="text"
+          v-model="newTodoText"
+          @keyup.enter="createTodo"
+        >
+        <label
+          for="new_todo"
+        >
+          New To-Do
+        </label>
+      </div>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -72,5 +89,6 @@ export default {
 <style scoped>
 li {
   list-style: none;
+  padding-left: 10px;
 }
 </style>
