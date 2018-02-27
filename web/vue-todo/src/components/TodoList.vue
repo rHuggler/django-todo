@@ -1,79 +1,44 @@
 <template>
-  <div class="to-do-list">
-    <h1
-      class="main-header">
-      To-Do List
-    </h1>
-    <ul
-      class="to-dos">
-
-      <li
-        class="to-do"
-        v-for="todo in todos"
-        :key="todo.id">
-
-        <input
-          type="checkbox"
-          :id="todo.id"
-          v-model="todo.status"
-          @change="changeTodoStatus(todo)">
-
-        <label
-          :for="todo.id"
-          :class="{ strike: todo.status }">
-          {{todo.text}}
-        </label>
-
-        <a
-          class="delete-button"
-          href="#"
-          @click="deleteTodo(todo)">
-          (delete)
-        </a>
-      </li>
-
-      <input
-        type="checkbox"
-        disabled>
+  <ul
+    class="todo-list"
+  >
+    <li
+      v-for="todo in todos"
+      :key="todo.id"
+    >
+      <todo-item
+        :todo="todo"
+        @remove="removeTodo"
+      >
+      </todo-item>
+    </li>
+    <li>
       <input
         type="text"
-        placeholder="New To-Do"
-        @keyup.enter="postNewTodo">
-
-    </ul>
-    <ul
-      class="errors"
-      v-if="errors"
-      v-for="error in errors"
-      :key="error.id">
-      <li
-        class="error">
-          {{error.response.data.text[0]}}
-      </li>
-    </ul>
-  </div>
+        v-model="newTodoText"
+        @keyup.enter="createTodo"
+      >
+    </li>
+  </ul>
 </template>
 
 <script>
-import axios from 'axios';
-
-var requester = axios.create({
-  baseURL: 'http://localhost:8000/',
-  timeout: 5000,
-})
+import axios from 'axios'
+import TodoItem from './TodoItem'
 
 export default {
   name: 'TodoList',
   data () {
     return {
       todos: [],
-      errors: []
+      errors: [],
+      newTodoText: ''
     }
   },
-
+  components: { TodoItem },
   methods: {
-    getTodoList () {
-      requester.get('todos/')
+    getTodos: function () {
+      axios.get('http://localhost:8000/todos/')
         .then(response => {
           this.todos = response.data
         })
@@ -81,96 +46,31 @@ export default {
           this.errors.push(e)
         })
     },
-
-    changeTodoStatus (todo) {
-      requester.patch('todos/' + todo.id + '/', {
-        status: todo.status
+    createTodo: function () {
+      axios.post('http://localhost:8000/todos/', {
+        text: this.newTodoText
       })
-    },
-
-    postNewTodo (event) {
-      let inputText = event.target.value
-      if (inputText) {
-        requester.post('todos/', {
-          text: inputText
+        .then(response => {
+          this.todos.push(response.data)
+          this.newTodoText = ''
         })
-          .then(response => {
-            this.todos.push(response.data)
-            event.target.value = ''
-          })
-          .catch(e => {
-            this.errors.push(e)
-          })
-      }
+        .catch(e => {
+          this.errors.push(e)
+        })
     },
-
-    deleteTodo (todo) {
-      if (confirm('This will delete "' + todo.text + '" to-do.')) {
-        requester.delete('todos/' + todo.id + '/')
-          .catch(e => {
-            this.errors.push(e)
-          })
-        let i = this.todos.indexOf(todo)
-        let _ = this.todos.splice(i, 1)
-      }
+    removeTodo: function (id) {
+      let index = this.todos.findIndex(todo => { return todo.id === id})
+      this.todos.splice(index, 1)
     }
   },
-
   created () {
-    this.getTodoList()
+    this.getTodos()
   }
 }
 </script>
 
-<style>
-.to-do-list {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.to-dos {
-  margin-top: 40px;
-  margin-bottom: 0;
-  padding-left: 20%;
-  text-align: left;
-}
-
-.errors {
-  margin-top: 0;
-  padding-left: 24%;
-  text-align: left;
-}
-
-.main-header {
-  margin: 0;
-}
-
-.to-do {
+<style scoped>
+li {
   list-style: none;
-  margin-bottom: 10px;
-}
-
-.error {
-  list-style: none;
-  font-size: 0.8rem;
-  color: crimson;
-}
-
-.strike {
-  text-decoration: line-through;
-}
-
-.delete-button {
-  border: none;
-  background-color: #fff;
-  font-weight: bold;
-}
-
-a {
-  text-decoration: none;
-  outline: none;
-  color: inherit;
-  font-size: 0.8rem;
-  padding-left: 5px;
 }
 </style>
