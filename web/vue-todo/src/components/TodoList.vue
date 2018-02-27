@@ -3,7 +3,7 @@
     class="row"
   >
     <ul
-      class="col s6 offset-s3 card-panel grey lighten-5"
+      class="col s8 offset-s2 card-panel grey lighten-5"
     >
     <h3
     >
