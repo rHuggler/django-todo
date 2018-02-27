@@ -1,20 +1,25 @@
 <template>
   <div
-    class="todo-item"
   >
-    <input
-      type="checkbox"
-      :id="'todo_'+id"
-      v-model="isDone"
-      @change="toggleStatus"
-    >
-    <span>{{text}}</span>
-    <a
-      href="#"
-      @click="removeTodo"
-    >
-      (remove)
-    </a>
+    <label>
+      <input
+        type="checkbox"
+        :id="'todo_'+id"
+        v-model="isDone"
+        @change="toggleStatus"
+      >
+      <span
+        :class="classObject"
+      >
+        {{text}}
+      </span>
+      <a
+        href="#"
+        @click="removeTodo"
+      >
+        (remove)
+      </a>
+    </label>
   </div>
 </template>
 
@@ -46,6 +51,15 @@ export default {
       axios.delete('http://localhost:8000/todos/'+this.id+'/')
       this.$emit('remove', this.id)
     }
+  },
+  computed: {
+    classObject: function () {
+      let textColor = this.isDone ? 'grey-text' : 'black-text'
+      return {
+        strikethrough: this.isDone,
+        [textColor]: true
+      }
+    }
   }
 }
 </script>
@@ -53,5 +67,8 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+}
+.strikethrough {
+  text-decoration: line-through;
 }
 </style>
