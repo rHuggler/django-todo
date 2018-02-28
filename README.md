@@ -1,6 +1,9 @@
 # django-todo
 This is a simple to-do list application divided in two parts: a RESTful API and a Web Application client.
 
+---
+![Project Showcase](https://thumbs.gfycat.com/DistantPiercingDormouse-size_restricted.gif)
+
 #### Technologies
 - Vue.js 2.5.2
 - Python 3.6.4
