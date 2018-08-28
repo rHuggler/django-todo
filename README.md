@@ -1,5 +1,5 @@
 # django-todo
-This is a simple to-do list application divided in two parts: a RESTful API and a Web Application client.
+This is a simple to-do list application divided in two parts: an API and a Web Application client.
 
 ---
 ![Project Showcase](https://thumbs.gfycat.com/DistantPiercingDormouse-size_restricted.gif)
